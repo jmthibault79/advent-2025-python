@@ -10,7 +10,7 @@ requires-python = ">=3.13"
 dependencies = []
 
 [project.scripts]
-advent-2025-python = "advent_2025_python:main"
+help = "advent_2025_python:main"
 d0 = "days:day0.main"
 
 [build-system]
