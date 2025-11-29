@@ -1,4 +1,7 @@
-def read_input(argv: list[str]) -> str:
+def parse_input_filename(argv: list[str]) -> str | None:
+    """
+    parse an input or sample file indicator.
+    """
     if len(argv) < 2:
         raise Exception("Expected a command argument to indicate input file")
 
@@ -18,5 +21,25 @@ def read_input(argv: list[str]) -> str:
         case "s":
             file_name = f"sample_inputs/{input}.txt"
 
-    with open(file_name, "r") as file:
+    return file_name
+
+
+def read_all_input(argv: list[str]) -> str:
+    """
+    read an input or sample file and return the entire contents.
+    """
+    with open(parse_input_filename(argv), "r") as file:
         return file.read()
+
+
+def parse_int_list_pair(file_name: str) -> tuple[list[int], list[int]]:
+    a, b = [], []
+    with open(file_name, "r") as file:
+        while file:
+            split_line = file.readline().split()
+            # file ends in empty line
+            if len(split_line) < 2:
+                break
+            a.append(int(split_line[0]))
+            b.append(int(split_line[-1]))
+    return a, b
