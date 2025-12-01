@@ -14,6 +14,8 @@ help = "advent_2025_python:main"
 d0 = "days:day0.main"
 d0p1 = "days:day0.part1"
 d0p2 = "days:day0.part2"
+d1 = "days:day1.main"
+d1p1 = "days:day1.part1"
 
 [build-system]
 requires = ["uv_build>=0.9.11,<0.10.0"]

@@ -33,10 +33,13 @@ def read_all_input(argv: list[str]) -> str:
 
 
 def parse_int_list_pair(file_name: str) -> tuple[list[int], list[int]]:
+    """
+    parse input as a pair of vertical integer lists, separated by some amount of whitespace
+    """
     a, b = [], []
     with open(file_name, "r") as file:
-        while file:
-            split_line = file.readline().split()
+        for line in file:
+            split_line = line.split()
             # file ends in empty line
             if len(split_line) < 2:
                 break
