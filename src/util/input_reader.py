@@ -32,6 +32,14 @@ def read_all_input(argv: list[str]) -> str:
         return file.read()
 
 
+def read_lines(argv: list[str]) -> list[str]:
+    """
+    read an input or sample file and return each line in a list.
+    """
+    with open(parse_input_filename(argv), "r") as file:
+        return [line for line in file]
+
+
 def parse_int_list_pair(file_name: str) -> tuple[list[int], list[int]]:
     """
     parse input as a pair of vertical integer lists, separated by some amount of whitespace

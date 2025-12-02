@@ -1,5 +1,5 @@
 import sys
-from util.input_reader import parse_input_filename
+from util.input_reader import read_lines
 from collections import Counter
 
 # start at position 50 (from 0-99)
@@ -7,46 +7,73 @@ from collections import Counter
 # p1: how many times do we hit 0?
 
 
-def main():
-    locations = parse(sys.argv)
-    _part1(locations)
-    _part2()
-
-
-def parse(argv: list[str]) -> list[int]:
+def go_right(curr: int, count: int) -> tuple[int, int]:
     """
-    return a list of the positions where we stopped
+    return the end position and the number of new times 0 was seen
     """
-    file_name = parse_input_filename(argv)
+    raw_next = curr + count
+    new_zeros, mod_next = raw_next // 100, raw_next % 100
+    curr = mod_next
 
-    curr = 50
+    return mod_next, new_zeros
+
+
+def go_left(curr: int, count: int) -> tuple[int, int]:
+    """
+    return the end position and the number of new times 0 was seen
+    """
+    full_rotation_zeros = count // 100
+    raw_next = curr - (count % 100)
+
+    # there are no "rotate 0" instructions, so we don't need to account for that
+    match raw_next:
+        case 0 if curr == 0:
+            return raw_next, full_rotation_zeros
+        case 0:
+            return raw_next, full_rotation_zeros + 1
+        case n if n > 0:
+            return raw_next, full_rotation_zeros
+        case n if n < 0 and curr == 0:
+            return raw_next + 100, full_rotation_zeros
+        case n if n < 0:
+            return raw_next + 100, full_rotation_zeros + 1
+
+
+def rotate_all(curr: int, rotations: list[str]) -> list[tuple[int, int]]:
     acc = []
-
-    with open(file_name, "r") as file:
-        for line in file:
-            first = line[0]
-            match first:
-                case "R":
-                    curr = (curr + int(line[1:])) % 100
-                    acc.append(curr)
-                case "L":
-                    curr = (curr - int(line[1:])) % 100
-                    acc.append(curr)
+    for r in rotations:
+        match r[0]:
+            case "R":
+                curr, crossings = go_right(curr, int(r[1:]))
+                acc.append((curr, crossings))
+            case "L":
+                curr, crossings = go_left(curr, int(r[1:]))
+                acc.append((curr, crossings))
     return acc
 
 
+def main():
+    rotations = read_lines(sys.argv)
+    locations = rotate_all(50, rotations)
+    _part1(locations)
+    _part2(locations)
+
+
 def part1():
-    locations = parse(sys.argv)
+    rotations = read_lines(sys.argv)
+    locations = rotate_all(50, rotations)
     _part1(locations)
 
 
-def _part1(locations: list[int]):
-    print(Counter(locations)[0])
+def _part1(locations: list[tuple[int, int]]):
+    print(Counter([end for end, _ in locations])[0])
 
 
 def part2():
-    _part2()
+    rotations = read_lines(sys.argv)
+    locations = rotate_all(50, rotations)
+    _part2(locations)
 
 
-def _part2():
-    print("N/A")
+def _part2(locations: list[tuple[int, int]]):
+    print(sum([zeros for _, zeros in locations]))
