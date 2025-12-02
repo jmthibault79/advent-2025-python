@@ -26,28 +26,28 @@ def go_left(curr: int, count: int) -> tuple[int, int]:
     raw_next = curr - (count % 100)
 
     # there are no "rotate 0" instructions, so we don't need to account for that
-    match raw_next:
-        case 0 if curr == 0:
+    match raw_next, curr:
+        case 0, 0:
             return raw_next, full_rotation_zeros
-        case 0:
+        case 0, _:
             return raw_next, full_rotation_zeros + 1
-        case n if n > 0:
+        case n, _ if n > 0:
             return raw_next, full_rotation_zeros
-        case n if n < 0 and curr == 0:
+        case n, 0 if n < 0:
             return raw_next + 100, full_rotation_zeros
-        case n if n < 0:
+        case n, _ if n < 0:
             return raw_next + 100, full_rotation_zeros + 1
 
 
 def rotate_all(curr: int, rotations: list[str]) -> list[tuple[int, int]]:
     acc = []
     for r in rotations:
-        match r[0]:
-            case "R":
-                curr, crossings = go_right(curr, int(r[1:]))
+        match [r[0], r[1:]]:
+            case ["R", count]:
+                curr, crossings = go_right(curr, int(count))
                 acc.append((curr, crossings))
-            case "L":
-                curr, crossings = go_left(curr, int(r[1:]))
+            case ["L", count]:
+                curr, crossings = go_left(curr, int(count))
                 acc.append((curr, crossings))
     return acc
 
