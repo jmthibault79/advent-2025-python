@@ -18,6 +18,7 @@ d1 = "days:day1.main"
 d1p1 = "days:day1.part1"
 d2 = "days:day2.main"
 d2p1 = "days:day2.part1"
+d2p2 = "days:day2.part2"
 
 [build-system]
 requires = ["uv_build>=0.9.11,<0.10.0"]
