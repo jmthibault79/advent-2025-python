@@ -3,9 +3,6 @@ name = "advent-2025-python"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "Joel Thibault", email = "thibault@broad.dev" }
-]
 requires-python = ">=3.13"
 dependencies = []
 
@@ -19,6 +16,8 @@ d1p1 = "days:day1.part1"
 d2 = "days:day2.main"
 d2p1 = "days:day2.part1"
 d2p2 = "days:day2.part2"
+d3 = "days:day3.main"
+d3p1 = "days:day3.part1"
 
 [build-system]
 requires = ["uv_build>=0.9.11,<0.10.0"]
