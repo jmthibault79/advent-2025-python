@@ -80,5 +80,26 @@ def part2():
     _part2(raw_map)
 
 
+def remove_rolls(current_map: list[list[int]]) -> tuple[int, list[list[int]]]:
+    adjacency = map_to_adjacency(augment_input_map(current_map))
+    fewer_than_4 = 0
+    updated_map = []
+    for row, row_vals in enumerate(current_map):
+        updated_map_row = row_vals
+        for col, col_val in enumerate(row_vals):
+            if col_val == 1 and adjacency[row][col] < 4:
+                fewer_than_4 += 1
+                updated_map_row[col] = 0
+        updated_map.append(updated_map_row)
+    return fewer_than_4, updated_map
+
+
 def _part2(raw_map: list[list[int]]):
-    print("implement me")
+    total_removed = 0
+    rolls_removed, updated_map = remove_rolls(raw_map)
+    while rolls_removed > 0:
+        print("removed", rolls_removed)
+        total_removed += rolls_removed
+        rolls_removed, updated_map = remove_rolls(updated_map)
+
+    print("total", total_removed)
