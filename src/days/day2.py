@@ -5,7 +5,7 @@ from util.input_reader import read_all_input
 # p2: parse ranges and find "invalid IDs" which consist of N >= 2 of duplicated number sequences, e.g. 121212, 123123123
 
 
-def parse_input(argv: list[str]) -> list[tuple[str, str]]:
+def parse_input(argv: list[str]) -> list[list[str]]:
     """
     parse input file into a list of number string pairs
     """
@@ -69,9 +69,9 @@ def split_range_p2(x: str, y: str) -> list[tuple[str, str]]:
             # odd first: clamp last to min(even)
             min_even = min_num_str(b)
             return [(x, str(int(min_even) - 1)), (min_even, y)]
-        case a, b:
+        case _:
             raise Exception(
-                f"Didn't account for the case of lengths {a}, {b} from {x}, {y}"
+                f"Didn't account for the case of lengths {len(x)}, {len(y)} from {x}, {y}"
             )
 
 
@@ -147,7 +147,7 @@ def part1():
     _part1(input)
 
 
-def _part1(input: list[tuple[str, str]]):
+def _part1(input: list[list[str]]):
     acc = []
     for line in input:
         clamped = clamp_range_p1(line[0], line[1])
@@ -161,7 +161,7 @@ def part2():
     _part2(input)
 
 
-def _part2(input: list[tuple[str, str]]):
+def _part2(input: list[list[str]]):
     acc = []
     for line in input:
         for same_length_range in split_range_p2(line[0], line[1]):

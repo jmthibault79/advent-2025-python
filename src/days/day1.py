@@ -38,6 +38,8 @@ def go_left(curr: int, count: int) -> tuple[int, int]:
         case n, _ if n < 0:
             return raw_next + 100, full_rotation_zeros + 1
 
+    raise Exception("Joel thought he accounted for all the match cases, but he didn't")
+
 
 def rotate_all(curr: int, rotations: list[str]) -> list[tuple[int, int]]:
     acc = []
