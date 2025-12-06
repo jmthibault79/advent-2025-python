@@ -1,5 +1,5 @@
 import sys
-from util.input_reader import parse_input_filename, parse_int_list_pair
+from util.input_reader import parse_int_list_pair
 from collections import Counter
 
 # "day 0" is actually day 1 from 2024, for practice
@@ -12,8 +12,7 @@ def main():
 
 
 def parse(argv: list[str]) -> tuple[list[int], list[int]]:
-    file_name = parse_input_filename(argv)
-    return parse_int_list_pair(file_name)
+    return parse_int_list_pair(argv)
 
 
 def part1():

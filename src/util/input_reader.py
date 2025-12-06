@@ -38,17 +38,38 @@ def read_lines(argv: list[str]) -> list[str]:
         return [line for line in file]
 
 
-def parse_int_list_pair(file_name: str) -> tuple[list[int], list[int]]:
+def parse_columns(argv: list[str]) -> list[list[str]]:
+    """
+    parse input as columns of strings, separated by some amount of whitespace
+    """
+    num_cols = None
+    with open(parse_input_filename(argv), "r") as file:
+        for line in file:
+            split_line = line.split()
+            match len(split_line):
+                case 0:
+                    # don't try to parse an empty line
+                    break
+                case n if not num_cols:
+                    num_cols = n
+                    acc = [[] for i in range(n)]
+                case n if n != num_cols:
+                    raise Exception(
+                        f"line has {n} columns, expected {num_cols}: {line}"
+                    )
+
+            for idx, val in enumerate(split_line):
+                acc[idx].append(val)
+    return acc
+
+
+def parse_int_list_pair(argv: list[str]) -> tuple[list[int], list[int]]:
     """
     parse input as a pair of vertical integer lists, separated by some amount of whitespace
     """
-    a, b = [], []
-    with open(file_name, "r") as file:
-        for line in file:
-            split_line = line.split()
-            # file ends in empty line
-            if len(split_line) < 2:
-                break
-            a.append(int(split_line[0]))
-            b.append(int(split_line[-1]))
-    return a, b
+
+    cols = parse_columns(argv)
+    if len(cols) != 2:
+        raise Exception(f"Unexpected number of columns in input: {len(cols)}")
+
+    return [int(val) for val in cols[0]], [int(val) for val in cols[1]]
