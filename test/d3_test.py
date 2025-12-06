@@ -1,7 +1,8 @@
 import pytest
-from days.day3 import pack, joltage_n
+from days.day3 import joltage_n
+from util.lists import list_to_int
 
-pack_testdata = [([1], 1), ([9, 3], 93), ([3, 0, 2, 4, 7, 9], 302479)]
+list_to_int_testdata = [([1], 1), ([9, 3], 93), ([3, 0, 2, 4, 7, 9], 302479)]
 
 joltage_n_testdata = [
     ([1, 1], 2, 11),
@@ -14,9 +15,9 @@ joltage_n_testdata = [
 ]
 
 
-@pytest.mark.parametrize("line, expected", pack_testdata)
-def test_pack(line, expected):
-    assert pack(line) == expected
+@pytest.mark.parametrize("line, expected", list_to_int_testdata)
+def test_list_to_int(line, expected):
+    assert list_to_int(line) == expected
 
 
 @pytest.mark.parametrize("line, n, expected", joltage_n_testdata)

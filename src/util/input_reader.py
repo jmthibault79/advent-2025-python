@@ -1,3 +1,5 @@
+import os
+
 def parse_input_filename(argv: list[str]) -> str:
     """
     parse an input or sample file indicator.
@@ -36,6 +38,14 @@ def read_lines(argv: list[str]) -> list[str]:
     """
     with open(parse_input_filename(argv), "r") as file:
         return [line for line in file]
+
+
+def read_chars(argv: list[str]) -> list[list[str]]:
+    """
+    read an input or sample file and return a list consisting of each line as a list of chars.
+    """
+    with open(parse_input_filename(argv), "r") as file:
+        return [[char for char in line.rstrip(os.linesep)] for line in file]
 
 
 def parse_columns(argv: list[str]) -> list[list[str]]:

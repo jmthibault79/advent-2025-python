@@ -25,6 +25,7 @@ d5 = "days:day5.main"
 d5p1 = "days:day5.part1"
 d6 = "days:day6.main"
 d6p1 = "days:day6.part1"
+d6p2 = "days:day6.part2"
 
 [build-system]
 requires = ["uv_build>=0.9.11,<0.10.0"]

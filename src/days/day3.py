@@ -1,5 +1,6 @@
 import sys
 from util.input_reader import read_lines
+from util.lists import list_to_int
 
 
 def parse_input(argv: list[str]) -> list[list[int]]:
@@ -14,19 +15,11 @@ def joltage_2(line: list[int]) -> int:
     return d1 * 10 + d2
 
 
-def pack(line: list[int]) -> int:
-    acc, rest = line[0], line[1:]
-    while len(rest) > 0:
-        next, rest = rest[0], rest[1:]
-        acc = acc * 10 + next
-    return acc
-
-
 def joltage_n(line: list[int], n) -> int:
     if n == 1:
         return max(line)
     elif len(line) == n:
-        return pack(line)
+        return list_to_int(line)
 
     # standard case: len(line) > n > 1
 
