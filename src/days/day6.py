@@ -1,7 +1,7 @@
 import sys
 from util.input_reader import parse_columns, read_chars
 from math import prod
-from util.lists import list_to_int, pad_to_length
+from util.lists import list_to_int
 
 
 def main():

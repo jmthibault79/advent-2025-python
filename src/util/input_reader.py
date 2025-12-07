@@ -1,5 +1,6 @@
 import os
 
+
 def parse_input_filename(argv: list[str]) -> str:
     """
     parse an input or sample file indicator.
