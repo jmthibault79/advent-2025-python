@@ -24,9 +24,9 @@ def parse_input(argv: list[str]) -> list[list[int]]:
 
 
 def rect_area(a: list[int], b: list[int]) -> int:
-    x = abs(a[0] - b[0]) + 1
-    y = abs(a[1] - b[1]) + 1
-    return x * y
+    width = abs(a[0] - b[0]) + 1
+    height = abs(a[1] - b[1]) + 1
+    return width * height
 
 
 def largest_rectangle(points: list[list[int]]) -> int:
@@ -38,5 +38,36 @@ def _part1(points: list[list[int]]):
     print(largest_rectangle(points))
 
 
-def _part2(input):
-    print("implement me")
+def build_path(red_points: list[list[int]]) -> list[list[int]]:
+    first_point = red_points[0]
+    points_plus_first_again = list(red_points)
+    points_plus_first_again.append(first_point)
+    path = []
+
+    for idx, point in enumerate(points_plus_first_again[1:]):
+        prev_point = red_points[idx]
+        match point, prev_point:
+            case a, b if a[0] == b[0] and a[1] > b[1]:
+                # add path right: [prev_point, point)
+                path.extend([[a[0], col] for col in range(b[1], a[1])])
+            case a, b if a[0] == b[0] and a[1] < b[1]:
+                # add path left: [prev_point, point)
+                path.extend([[a[0], col] for col in range(b[1], a[1], -1)])
+            case a, b if a[1] == b[1] and a[0] > b[0]:
+                # add path up: [prev_point, point)
+                path.extend([[row, a[1]] for row in range(b[0], a[0])])
+            case a, b if a[1] == b[1] and a[0] < b[0]:
+                # add path up: [prev_point, point)
+                path.extend([[row, a[1]] for row in range(b[0], a[0], -1)])
+    return path
+
+
+def largest_red_green_rectangle(points: list[list[int]]) -> int:
+    path = build_path(points)
+    print(points)
+    print(path)
+    return len(path)
+
+
+def _part2(points: list[list[int]]):
+    print(largest_red_green_rectangle(points))
