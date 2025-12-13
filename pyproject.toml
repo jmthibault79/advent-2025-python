@@ -35,6 +35,9 @@ d8p2 = "days:day8.part2"
 d9 = "days:day9.main"
 d9p1 = "days:day9.part1"
 d9p2 = "days:day9.part2"
+d10 = "days:day10.main"
+d10p1 = "days:day10.part1"
+d10p2 = "days:day10.part2"
 
 [build-system]
 requires = ["uv_build>=0.9.11,<0.10.0"]
