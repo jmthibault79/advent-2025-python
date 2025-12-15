@@ -23,7 +23,7 @@ def part2():
 
 
 # we are given N XYZ "junction box" coordinates. looks like each coordinate is betw 0 and 100K
-# we're looking for the Q (s=10, i=1000) closest pairs, by manhattan distance
+# we're looking for the Q (s=10, i=1000) closest pairs, by euclidean distance
 # pairing up junc-boxes creates "circuits" which can keep growing as other JBs are added to the pile
 # multiply the sizes of the 3 largest circuits
 
