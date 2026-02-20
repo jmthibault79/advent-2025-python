@@ -1,6 +1,7 @@
 import sys
 import re
 from util.input_reader import read_lines
+from util.profiler import profile_function
 from itertools import combinations
 
 
@@ -18,6 +19,11 @@ def part1():
 def part2():
     input = parse_input(sys.argv)
     _part2(input)
+
+
+def profile_d10p1():
+    """Profile day 10 part 1"""
+    profile_function(func=part1, argv=sys.argv[1:])
 
 
 def parse_input(argv: list[str]) -> list[tuple[list[bool], list[list[int]], list[int]]]:

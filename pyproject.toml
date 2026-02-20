@@ -42,6 +42,8 @@ d11 = "days:day11.main"
 d11p1 = "days:day11.part1"
 d11p2 = "days:day11.part2"
 
+profile-d10p1 = "days.day10:profile_d10p1"
+
 [build-system]
 requires = ["uv_build>=0.9.11,<0.10.0"]
 build-backend = "uv_build"
